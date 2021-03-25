@@ -67,7 +67,7 @@ pasoapaso_rm <- pasoapaso %>%
   filter(codigo_region == 13,
          zona %in% c("Total", "Urbana")) %>% 
   select(-zona) %>% 
-  pivot_longer(5:245, names_to = "fecha", values_to = "etapa") %>% 
+  pivot_longer(5:(ncol(pasoapaso)-1), names_to = "fecha", values_to = "etapa") %>% 
   mutate(codigo_comuna = as.character(codigo_comuna),
          etapa = as.factor(etapa),
          fecha = ymd(fecha))
@@ -84,8 +84,10 @@ RM_urb_shp_pp %>%
   filter(fecha == today()) %>% 
   ggplot() +
   geom_sf(aes(fill = etapa), col = NA) +
-  scale_fill_manual(values = c("red", "orange", "yellow", "green")) +
-  theme_void()
+  scale_fill_manual(values = c("red", "yellow", "orange", "green")) +
+  theme_void() +
+  theme(plot.title = element_text(size = 16, face = "bold")) +
+  labs(title = "Fecha: XXXX-XX-XX")
 
 ## --
 ## Animación
@@ -96,14 +98,15 @@ animacion_pasopaso <- RM_urb_shp_pp %>%
   as_tibble() %>%
   ggplot() +
   geom_sf(aes(fill = etapa, geometry = geometry), col = NA) +
-  scale_fill_manual(values = c("red", "orange", "dark green", "green")) +
+  scale_fill_manual(values = c("red", "orange", "yellow", "green")) +
   theme_void() +
   transition_time(fecha) +
+  theme(plot.title = element_text(size = 16, face = "bold"))  +
   labs(title = 'Fecha: {frame_time}')
 
 # Mostrar animación
-animate(animacion_pasopaso, fps = 5)
+animate(animacion_pasopaso, fps = 5, renderer = gifski_renderer(loop = FALSE))
 
 # Guardar animación como GIF
-anim_save("GifEtapasPasoPaso.gif")
+anim_save("GifPasoaPaso.gif")
 
