@@ -106,5 +106,5 @@ animacion_pasopaso <- RM_urb_shp_pp %>%
 animate(animacion_pasopaso, fps = 5, renderer = gifski_renderer(loop = FALSE))
 
 # Guardar animación como GIF
-anim_save("GifPasoaPaso.gif")
+anim_save("GIFPasoaPaso.gif")
 
