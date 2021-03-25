@@ -46,8 +46,6 @@ RM_urb_shp_comb <- RM_urb_shp %>%
   summarise(geometry = st_union(geometry)) %>% 
   ungroup()
 
-#RM_urb_shp_comb <- RM_urb_shp
-
 # Ver Shape "RM_urb_shp_comb"
 ggplot() +
   geom_sf(data = RM_urb_shp_comb) +
