@@ -30,7 +30,7 @@ urbano_noconsiderar <- c("EL PRINCIPAL", "SAN ALFONSO", "SAN JOSÉ DE MAIPO",
                          "LO AGUIRRE", "LO HERRERA", "NOVICIADO ALTO", "EL MAITÉN")
 
 # Cargar shape de zonas urbanas (sacar zonas "discontinuas")
-RM_urb_shp <- st_read("C:/Users/pjagu/OneDrive/Documentos/Zonas_urbanas_2017_Chile.shp", quiet = TRUE) %>% 
+RM_urb_shp <- st_read("shapes/Zonas_urbanas_2017_Chile.shp", quiet = TRUE) %>% 
   filter(NOM_COMUNA %in% str_to_upper(comunas_considerar),
          !URBANO %in% urbano_noconsiderar)
 
