@@ -1,6 +1,7 @@
-library(chilemapas)
+#library(chilemapas)
 library(dplyr)
 library(tidyr)
+library(sf)
 library(ggplot2)
 library(gganimate)
 library(readr)
@@ -79,7 +80,7 @@ RM_urb_shp_pp <- left_join(RM_urb_shp_comb, pasoapaso_rm, by = c("COMUNA" = "cod
 
 # Probar con un día ("hoy") que esté todo OK
 RM_urb_shp_pp %>% 
-  filter(fecha == today()) %>% 
+  filter(fecha == last(fecha)) %>% 
   ggplot() +
   geom_sf(aes(fill = etapa), col = NA) +
   scale_fill_manual(values = c("red", "yellow", "orange", "green")) +
